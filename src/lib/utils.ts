@@ -34,6 +34,11 @@ export function getImageProxyUrl(): string | null {
 export function processImageUrl(originalUrl: string): string {
   if (!originalUrl) return originalUrl;
 
+  // 強制攔截豆瓣圖片，替換為 LunaTV 使用的騰訊雲 CDN 鏡像
+  if (originalUrl.includes('doubanio.com')) {
+    return originalUrl.replace(/img\d\.doubanio\.com/g, 'img.doubanio.cmliussss.net');
+  }
+
   const proxyUrl = getImageProxyUrl();
   if (!proxyUrl) return originalUrl;
 
